@@ -1,0 +1,91 @@
+Blazor Core Host Configuration
+
+1. Blazor WebAssembly Standalone App(Client)
+
+2. Web api Core(Server)
+
+3. Class Library
+
+4. Add dependency Class LibraryàClient[Shared]
+
+5. Add Dependency Client, Library àServer[Shared]
+
+6. Packagesà Server
+
+1. "Microsoft.AspNetCore.Components.WebAssembly.Server"
+
+2. "Microsoft.EntityFrameworkCore" Version="8.0.2" />
+
+3. "Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
+
+4. "Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
+
+ <InvariantGlobalization>false</InvariantGlobalization>
+
+5. Library
+
+      1. Student
+
+      2. Address
+
+7. AppDbContext –Server
+
+8. program.cs
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("con")));
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+
+{
+
+    app.UseSwagger();
+
+    app.UseSwaggerUI();
+
+    app.UseWebAssemblyDebugging();
+
+}
+
+app.UseAuthorization();
+
+app.UseBlazorFrameworkFiles();
+
+app.UseStaticFiles();
+
+app.MapFallbackToFile("index.html");
+
+app.MapControllers();
+
+app.Run();
+
+9. Appsettings.json Then [Add-Migration]
+
+10. StudentsController
+
+11. Server LaunchSetting (Property)
+
+      Remove Swagger
+
+      Add---
+
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/ _framework/debug/ws-proxy?browser={browserInspectUri}",
+
+12. _Imports
+
+13. NavMenu
+
+14. Pages -Razor Component
+
+15. wwwroot -images [Folder]
